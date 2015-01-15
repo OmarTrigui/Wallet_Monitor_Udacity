@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:weightSum="1"
+              android:gravity="center_vertical"
+              android:background="#555555">
+
+    <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="40dp">
+
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="My Wallet Monitor - Udacity"
+                android:id="@+id/textView"
+                android:layout_gravity="center_horizontal"
+                android:textSize="16sp"
+                android:textColor="#CCCCCC"/>
+
+        <View
+                android:layout_width="fill_parent"
+                android:layout_height="1dip"
+                android:background="#CCCCCC" />
+
+
+    </LinearLayout>
+
+
+
+    <ImageView
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:id="@+id/imageView"
+            android:background="@drawable/ic_launcher"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="10dp" />
+
+    <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp">
+
+
+        <com.gc.materialdesign.views.ProgressBarCircularIndetermininate
+            android:id="@+id/progressBarCircularIndetermininate"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:background="#d1c4d9" />
+
+    </LinearLayout>
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Loading ..."
+            android:id="@+id/textView3" android:layout_gravity="center_horizontal" android:textColor="#CCCCCC"
+            android:layout_marginTop="10dp"/>
+
+
+</LinearLayout>
