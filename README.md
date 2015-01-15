@@ -1,7 +1,7 @@
 # Udacity_Wallet_Monitor
 A repository for my app featuring all source code and assets
 
-Wallet_Monitor is a simple android application that give the users the ability to save their payments.
+Wallet_Monitor is a simple android application that gives the users the ability to save their payments.
 In addition, this application can saves any item, its description and the paid amount.
 
 # Technical description :
