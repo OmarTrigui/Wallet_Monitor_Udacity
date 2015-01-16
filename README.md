@@ -24,3 +24,4 @@ Wallet_Monitor gives you a statistics about your payments in a specified period 
 # Attached documents :
 - The Signed APK (signed-release.apk)
 - self-evaluation document (AndroidFundamentalsProjectSelf-Evaluation.docx)
+- ScreenShots Folder (ScreenShots)
