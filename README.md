@@ -17,3 +17,6 @@ In addition, this application can saves any item, its description and the paid a
 - https://thenewcircle.com/s/post/1375/android_content_provider_tutorial
 - http://stackoverflow.com/
 - https://developer.android.com/training/index.html
+
+# Attached documents :
+The Signed APK and the self-evaluation document are included in the root of the master branch
