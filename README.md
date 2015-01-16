@@ -4,6 +4,9 @@ A repository for my app featuring all source code and assets
 Wallet_Monitor is a simple android application that gives the users the ability to save their payments.
 In addition, this application can saves any item, its description and the paid amount.
 
+What does this app solves ?
+Wallet_Monitor gives you a statistics about your payments in a specified period in order to avoid saving them and calculating the total of payments manually
+
 # Technical description :
 - Material Design Progress Bar, Drawer
 - SwipeToRefresh ListView (ToRefresh the list of Payments)
@@ -19,4 +22,5 @@ In addition, this application can saves any item, its description and the paid a
 - https://developer.android.com/training/index.html
 
 # Attached documents :
-The Signed APK and the self-evaluation document are included in the root of the master branch
+- The Signed APK (signed-release.apk)
+- self-evaluation document (AndroidFundamentalsProjectSelf-Evaluation.docx)
