@@ -151,7 +151,6 @@ public class Main_Activity extends ActionBarActivity
                 TextView messageText = (TextView)dialog.findViewById(android.R.id.message);
                 messageText.setGravity(Gravity.CENTER);
                 dialog.show();
-
                 break;
 
         }
