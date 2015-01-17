@@ -9,7 +9,6 @@ import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -58,10 +57,12 @@ public class Main_Activity extends ActionBarActivity
 
         switch (position) {
             case 0:
+                getSupportActionBar().setTitle("Home");
                 fragment = new home();
                 break;
 
             case 1:
+                getSupportActionBar().setTitle("My Statistics");
                 fragment = new Statistics_Fragment();
                 break;
 
