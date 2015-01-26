@@ -27,5 +27,5 @@ Wallet_Monitor gives you a statistics about your payments in a specified period 
 - self-evaluation document (AndroidFundamentalsProjectSelf-Evaluation.docx)
 - ScreenShots Folder (ScreenShots)
 
-# Developed application
+# Additional app
 -https://play.google.com/store/apps/details?id=projet.enis.gen
