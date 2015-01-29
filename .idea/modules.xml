@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/WM.iml" filepath="$PROJECT_DIR$/WM.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Wallet_Monitor_Udacity.iml" filepath="$PROJECT_DIR$/Wallet_Monitor_Udacity.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
