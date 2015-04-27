@@ -47,7 +47,7 @@ public class Add_Item_Activity extends ActionBarActivity {
                 myCustomProvider.CONTENT_URI, values);
 
         Toast.makeText(getBaseContext(),
-                "Your item has been successfully added, pull down the payments list to refresh", Toast.LENGTH_LONG).show();
+                "Your item has been successfully added", Toast.LENGTH_LONG).show();
     }
 
 }

@@ -25,7 +25,6 @@ public class home extends Fragment implements LoaderCallbacks<Cursor> {
     static  ListView myList;
     private boolean mTwoPane;
     private SimpleCursorAdapter adapt;
-    private SwipeRefreshLayout swipeContainer;
 
     View rootView;
 
@@ -91,27 +90,32 @@ public class home extends Fragment implements LoaderCallbacks<Cursor> {
             }
         });
 
-        swipeContainer = (SwipeRefreshLayout) rootView.findViewById(R.id.swipeContainer);
-        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-
-                Cursor cursor = getActivity().getContentResolver().query(myCustomProvider.CONTENT_URI, projection,
-                        null, null, null);
-
-                adapt = new SimpleCursorAdapter(
-                        getActivity(), R.layout.list_item,
-                        cursor, uiBindFrom, uiBindTo,
-                        CursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER);
-
-                myList.setAdapter(adapt);
-
-                swipeContainer.setRefreshing(false);
-            }
-        });
-
-
         return rootView;
+    }
+
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+
+        final String[] projection = {myCustomProvider.ITEM_ID, myCustomProvider.ITEM, myCustomProvider.DESC,
+                myCustomProvider.PRICE, myCustomProvider.DT};
+
+        final String[] uiBindFrom = {myCustomProvider.ITEM, myCustomProvider.DESC, myCustomProvider.PRICE, myCustomProvider.DT};
+
+        final int[] uiBindTo = {R.id.textView3, R.id.textView4, R.id.textView5, R.id.textView10};
+
+        Cursor cursor = getActivity().getContentResolver().query(myCustomProvider.CONTENT_URI, projection,
+                null, null, null);
+
+
+        adapt = new SimpleCursorAdapter(
+                getActivity(), R.layout.list_item,
+                cursor, uiBindFrom, uiBindTo,
+                CursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER);
+
+        myList.setAdapter(adapt);
     }
 
     @Override
