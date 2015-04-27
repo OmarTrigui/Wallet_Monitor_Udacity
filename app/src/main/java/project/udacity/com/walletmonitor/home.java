@@ -99,12 +99,12 @@ public class home extends Fragment implements LoaderCallbacks<Cursor> {
                 Cursor cursor = getActivity().getContentResolver().query(myCustomProvider.CONTENT_URI, projection,
                         null, null, null);
 
-                SimpleCursorAdapter adap = new SimpleCursorAdapter(
+                adapt = new SimpleCursorAdapter(
                         getActivity(), R.layout.list_item,
                         cursor, uiBindFrom, uiBindTo,
                         CursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER);
 
-                myList.setAdapter(adap);
+                myList.setAdapter(adapt);
 
                 swipeContainer.setRefreshing(false);
             }
