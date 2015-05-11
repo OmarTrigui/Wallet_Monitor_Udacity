@@ -25,19 +25,28 @@ public class Add_Item_Activity extends ActionBarActivity {
 
         ContentValues values = new ContentValues();
 
-        String item =  ((EditText)findViewById(R.id.txtItem)).getText().toString().trim();
-        values.put(myCustomProvider.ITEM,item);
+        String item = ((EditText) findViewById(R.id.txtItem)).getText().toString().trim();
+        values.put(myCustomProvider.ITEM, item);
 
-        String desc =  ((EditText)findViewById(R.id.txtDesc)).getText().toString().trim();
-        values.put(myCustomProvider.DESC,desc);
+        String desc = ((EditText) findViewById(R.id.txtDesc)).getText().toString().trim();
+        values.put(myCustomProvider.DESC, desc);
 
-        String price = ((EditText)findViewById(R.id.txtPrice)).getText().toString().trim();
-        values.put(myCustomProvider.PRICE,price);
+        String price = ((EditText) findViewById(R.id.txtPrice)).getText().toString().trim();
+        values.put(myCustomProvider.PRICE, price);
 
 
-        if (item.length()==0) {Toast.makeText(getApplicationContext(),"Invalid Item",Toast.LENGTH_LONG).show();return;}
-        if (desc.length()==0) {Toast.makeText(getApplicationContext(),"Invalid Description",Toast.LENGTH_LONG).show();return;}
-        if (price.length()==0) {Toast.makeText(getApplicationContext(),"Invalid Price",Toast.LENGTH_LONG).show();return;}
+        if (item.length() == 0) {
+            Toast.makeText(getApplicationContext(), "Invalid Item", Toast.LENGTH_LONG).show();
+            return;
+        }
+        if (desc.length() == 0) {
+            Toast.makeText(getApplicationContext(), "Invalid Description", Toast.LENGTH_LONG).show();
+            return;
+        }
+        if (price.length() == 0) {
+            Toast.makeText(getApplicationContext(), "Invalid Price", Toast.LENGTH_LONG).show();
+            return;
+        }
 
 
         values.put(myCustomProvider.DT, new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime()));

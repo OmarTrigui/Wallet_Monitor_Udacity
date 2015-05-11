@@ -13,7 +13,7 @@ import android.widget.TextView;
 
 public class Full_Description_Fragment extends Fragment {
 
-    View rootView;
+    private View rootView;
     static TextView tv;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

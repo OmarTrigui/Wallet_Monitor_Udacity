@@ -4,8 +4,6 @@ package project.udacity.com.walletmonitor;
  * Created by omar on 1/13/15.
  */
 
-import java.util.HashMap;
-
 import android.content.ContentProvider;
 import android.content.ContentUris;
 import android.content.ContentValues;
@@ -18,6 +16,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
 import android.text.TextUtils;
+
+import java.util.HashMap;
 
 public class myCustomProvider extends ContentProvider {
 
@@ -38,13 +38,14 @@ public class myCustomProvider extends ContentProvider {
     static final int IT_ID = 2;
 
     static final UriMatcher uriMatcher;
-    static{
+
+    static {
         uriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
         uriMatcher.addURI(PROVIDER_NAME, "Items", IT);
         uriMatcher.addURI(PROVIDER_NAME, "Items/#", IT_ID);
     }
 
-    static  SQLiteDatabase db;
+    static SQLiteDatabase db;
     static final String DATABASE_NAME = "MyWallet";
     static final String ITEMS_TABLE_NAME = "MyItems";
     static final int DATABASE_VERSION = 1;
@@ -53,24 +54,23 @@ public class myCustomProvider extends ContentProvider {
                     " (_id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
                     " item TEXT NOT NULL, " +
                     " desc TEXT NOT NULL, " +
-                    " dt DATE NOT NULL, " +
+                    " dt TEXT NOT NULL, " +
                     " price INTEGER NOT NULL);";
 
     private static class DatabaseHelper extends SQLiteOpenHelper {
-        DatabaseHelper(Context context){
+        DatabaseHelper(Context context) {
             super(context, DATABASE_NAME, null, DATABASE_VERSION);
         }
 
         @Override
-        public void onCreate(SQLiteDatabase db)
-        {
+        public void onCreate(SQLiteDatabase db) {
             db.execSQL(CREATE_DB_TABLE);
         }
 
         @Override
         public void onUpgrade(SQLiteDatabase db, int oldVersion,
                               int newVersion) {
-            db.execSQL("DROP TABLE IF EXISTS " +  ITEMS_TABLE_NAME);
+            db.execSQL("DROP TABLE IF EXISTS " + ITEMS_TABLE_NAME);
             onCreate(db);
         }
 
@@ -82,16 +82,15 @@ public class myCustomProvider extends ContentProvider {
         Context context = getContext();
         DatabaseHelper dbHelper = new DatabaseHelper(context);
         db = dbHelper.getWritableDatabase();
-        return (db!=null);
+        return (db != null);
     }
 
     @Override
     public Uri insert(Uri uri, ContentValues values) {
 
-        long rowID = db.insert(	ITEMS_TABLE_NAME, "", values);
+        long rowID = db.insert(ITEMS_TABLE_NAME, "", values);
 
-        if (rowID > 0)
-        {
+        if (rowID > 0) {
             Uri _uri = ContentUris.withAppendedId(CONTENT_URI, rowID);
             getContext().getContentResolver().notifyChange(_uri, null);
             return _uri;
@@ -111,13 +110,13 @@ public class myCustomProvider extends ContentProvider {
                 qb.setProjectionMap(ITEMS_PROJECTION_MAP);
                 break;
             case IT_ID:
-                qb.appendWhere( ITEM_ID + "=" + uri.getPathSegments().get(1));
+                qb.appendWhere(ITEM_ID + "=" + uri.getPathSegments().get(1));
                 break;
             default:
                 throw new IllegalArgumentException("Unknown URI " + uri);
         }
 
-        Cursor c = qb.query(db,	projection,	selection, selectionArgs,
+        Cursor c = qb.query(db, projection, selection, selectionArgs,
                 null, null, null);
         c.setNotificationUri(getContext().getContentResolver(), uri);
 
@@ -133,13 +132,13 @@ public class myCustomProvider extends ContentProvider {
     public int delete(Uri uri, String selection, String[] selectionArgs) {
         int count;
 
-        switch (uriMatcher.match(uri)){
+        switch (uriMatcher.match(uri)) {
             case IT:
                 count = db.delete(ITEMS_TABLE_NAME, selection, selectionArgs);
                 break;
             case IT_ID:
                 String id = uri.getPathSegments().get(1);
-                count = db.delete( ITEMS_TABLE_NAME, ITEM_ID +  " = " + id +
+                count = db.delete(ITEMS_TABLE_NAME, ITEM_ID + " = " + id +
                         (!TextUtils.isEmpty(selection) ? " AND (" +
                                 selection + ')' : ""), selectionArgs);
                 break;
@@ -156,7 +155,7 @@ public class myCustomProvider extends ContentProvider {
                       String[] selectionArgs) {
         int count;
 
-        switch (uriMatcher.match(uri)){
+        switch (uriMatcher.match(uri)) {
             case IT:
                 count = db.update(ITEMS_TABLE_NAME, values,
                         selection, selectionArgs);
@@ -168,7 +167,7 @@ public class myCustomProvider extends ContentProvider {
                                 selection + ')' : ""), selectionArgs);
                 break;
             default:
-                throw new IllegalArgumentException("Unknown URI " + uri );
+                throw new IllegalArgumentException("Unknown URI " + uri);
         }
         getContext().getContentResolver().notifyChange(uri, null);
         return count;

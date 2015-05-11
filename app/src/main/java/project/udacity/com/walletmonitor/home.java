@@ -7,12 +7,12 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.LoaderManager;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.support.v4.widget.CursorAdapter;
 import android.support.v4.widget.SimpleCursorAdapter;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,11 +22,12 @@ import android.widget.ListView;
 
 public class home extends Fragment implements LoaderCallbacks<Cursor> {
 
-    static  ListView myList;
+    private static ListView myList;
     private boolean mTwoPane;
     private SimpleCursorAdapter adapt;
-
-    View rootView;
+    private LoaderManager.LoaderCallbacks<Cursor> mCallbacks;
+    private static final int LOADER_ID = 1;
+    private View rootView;
 
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -46,18 +47,23 @@ public class home extends Fragment implements LoaderCallbacks<Cursor> {
 
         adapt = new SimpleCursorAdapter(
                 getActivity(), R.layout.list_item,
-                cursor, uiBindFrom, uiBindTo,
+                null, uiBindFrom, uiBindTo,
                 CursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER);
 
         myList.setAdapter(adapt);
 
         if (rootView.findViewById(R.id.textView16) != null) {
             mTwoPane = true;
-                         FragmentManager fragmentManager = getFragmentManager();
-                         fragmentManager.beginTransaction().replace(R.id.descript, new Full_Description_Fragment()).commit();
+            FragmentManager fragmentManager = getFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.descript, new Full_Description_Fragment()).commit();
 
-        }
-        else mTwoPane = false;
+        } else mTwoPane = false;
+
+
+        mCallbacks = this;
+        LoaderManager lm = getLoaderManager();
+        lm.initLoader(LOADER_ID, null, mCallbacks);
+
 
         myList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -68,10 +74,10 @@ public class home extends Fragment implements LoaderCallbacks<Cursor> {
                 Uri item = Uri.parse(URL);
                 Cursor c = getActivity().managedQuery(item, null, null, null, "_id");
                 int count = 0;
-                String desc="";
+                String desc = "";
                 if (c.moveToFirst()) {
-                    do{
-                        if (count==position) {
+                    do {
+                        if (count == position) {
                             desc = c.getString(c.getColumnIndex(myCustomProvider.DESC));
                             break;
                         }
@@ -80,10 +86,9 @@ public class home extends Fragment implements LoaderCallbacks<Cursor> {
                 }
 
                 if (mTwoPane) Full_Description_Fragment.tv.setText(desc);
-                else
-                {
-                    Intent i = new Intent(getActivity(),Detail_Item_Activity.class);
-                    i.putExtra("desc",desc);
+                else {
+                    Intent i = new Intent(getActivity(), Detail_Item_Activity.class);
+                    i.putExtra("desc", desc);
                     startActivity(i);
                 }
 
@@ -93,30 +98,6 @@ public class home extends Fragment implements LoaderCallbacks<Cursor> {
         return rootView;
     }
 
-
-    @Override
-    public void onStart() {
-        super.onStart();
-
-
-        final String[] projection = {myCustomProvider.ITEM_ID, myCustomProvider.ITEM, myCustomProvider.DESC,
-                myCustomProvider.PRICE, myCustomProvider.DT};
-
-        final String[] uiBindFrom = {myCustomProvider.ITEM, myCustomProvider.DESC, myCustomProvider.PRICE, myCustomProvider.DT};
-
-        final int[] uiBindTo = {R.id.textView3, R.id.textView4, R.id.textView5, R.id.textView10};
-
-        Cursor cursor = getActivity().getContentResolver().query(myCustomProvider.CONTENT_URI, projection,
-                null, null, null);
-
-
-        adapt = new SimpleCursorAdapter(
-                getActivity(), R.layout.list_item,
-                cursor, uiBindFrom, uiBindTo,
-                CursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER);
-
-        myList.setAdapter(adapt);
-    }
 
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {

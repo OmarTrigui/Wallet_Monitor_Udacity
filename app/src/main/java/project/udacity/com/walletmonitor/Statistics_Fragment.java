@@ -15,37 +15,36 @@ import java.util.Calendar;
 
 public class Statistics_Fragment extends Fragment {
 
-    View rootView;
+    private View rootView;
+
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.statistics_view, container, false);
 
-            String URL = myCustomProvider.URL;
-            Uri item = Uri.parse(URL);
-            Cursor c = getActivity().managedQuery(item, null, null, null, "_id");
-            int paid = 0;
-            int checkFirstDate = 0;
+        String URL = myCustomProvider.URL;
+        Uri item = Uri.parse(URL);
+        Cursor c = getActivity().managedQuery(item, null, null, null, "_id");
+        int paid = 0;
+        int checkFirstDate = 0;
 
-            if (c.moveToFirst()) {
-                do{
-                    if (checkFirstDate==0) {checkFirstDate=1;
-                        ((TextView) rootView.findViewById(R.id.textView13)).setText(c.getString(c.getColumnIndex(myCustomProvider.DT)));
-                    }
+        if (c.moveToFirst()) {
+            do {
+                if (checkFirstDate == 0) {
+                    checkFirstDate = 1;
+                    ((TextView) rootView.findViewById(R.id.textView13)).setText(c.getString(c.getColumnIndex(myCustomProvider.DT)));
+                }
 
-                    try {
-                        paid += Integer.parseInt(c.getString(c.getColumnIndex(myCustomProvider.PRICE)));
-                    }
-                    catch (Exception e)
-                    {
-                        e.printStackTrace();
-                    }
-
-
-                } while (c.moveToNext());
-            }
+                try {
+                    paid += Integer.parseInt(c.getString(c.getColumnIndex(myCustomProvider.PRICE)));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
 
 
+            } while (c.moveToNext());
+        }
 
-       ((TextView) rootView.findViewById(R.id.textView11)).setText(Integer.toString(paid));
+
+        ((TextView) rootView.findViewById(R.id.textView11)).setText(Integer.toString(paid));
 
         String date = new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime());
 
